@@ -19,7 +19,57 @@
     {
       "Path": "WhastasapProcess.xaml",
       "SortBy": 0,
-      "VariablesSectionElementsOrder": [],
+      "VariablesSectionElementsOrder": [
+        "tableTime&Sequence_80",
+        "tableDescription&Sequence_80",
+        "tablePersonName&Sequence_80",
+        "output_Actual_DataTable&Sequence_74",
+        "concatString&Sequence_74",
+        "rowSplitArray&Sequence_67",
+        "tempPersonName&Sequence_65",
+        "indexSecondLoop&Sequence_46",
+        "dateIndex&Sequence_1",
+        "index&Sequence_46",
+        "getTextDate&Sequence_44",
+        "dataTable&Sequence_44",
+        "dataTableDate&Sequence_45",
+        "count&Sequence_61",
+        "dataTime&Sequence_1",
+        "messageString&Sequence_49",
+        "outputDataTable&Sequence_50",
+        "nameArray&Sequence_1",
+        "nameString&Sequence_1",
+        "data_Date&Sequence_1",
+        "description&Sequence_1",
+        "applicationName&Sequence_1",
+        "temp&Sequence_1",
+        "messageString&Sequence_8",
+        "currentDate&Sequence_33",
+        "variable2&Sequence_33",
+        "getTextDate&Sequence_36",
+        "dataTable&Sequence_36",
+        "dataTableDate&Sequence_42",
+        "outputDataTable&Sequence_4",
+        "groupName&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "tempObject",
+        "nameArrayOfObject",
+        "count",
+        "dataDate",
+        "personName"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "whatsappTableScrapping.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "dataTableNew&Sequence_2",
+        "dataTable&Sequence_2",
+        "dataTable2&Sequence_2"
+      ],
       "ArgumentsSectionElementsOrder": [],
       "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null

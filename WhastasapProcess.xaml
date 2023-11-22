@@ -1,4 +1,17 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="WhastasapProcess" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="617,1524" sap2010:WorkflowViewState.IdRef="WhastasapProcess_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="WhastasapProcess" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ueab="clr-namespace:UiPath.Excel.Activities.Business;assembly=UiPath.Excel.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="personName" Type="OutArgument(x:String)" />
+    <x:Property Name="dataDate" Type="OutArgument(x:String)" />
+    <x:Property Name="count" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="nameArrayOfObject" Type="InOutArgument(scg:List(x:Object))" />
+    <x:Property Name="tempObject" Type="InOutArgument(x:String)" />
+    <x:Property Name="BreakTriggerScopeInArgument" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1438,6356</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>WhastasapProcess_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -34,6 +47,21 @@
       <x:String>System.Security</x:String>
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Reflection</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>UiPath.Excel.Model</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>System.Collections.Specialized</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+      <x:String>UiPath.Activities.System.Text</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.ExtractData</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -91,60 +119,1426 @@
       <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.Specialized</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="WhastasapProcess" sap:VirtualizedContainerService.HintSize="546,1459" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="WhastasapProcess" sap:VirtualizedContainerService.HintSize="1448,6291" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="groupName">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">testing share</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="info family" Name="groupName" />
+      <Variable x:TypeArguments="x:String" Name="description" />
+      <Variable x:TypeArguments="x:String" Default="whatsapp web   " Name="applicationName" />
+      <Variable x:TypeArguments="x:Boolean" Default="False" Name="temp" />
+      <Variable x:TypeArguments="x:String" Default="11/4/2023" Name="data_Date" />
+      <Variable x:TypeArguments="x:String" Name="nameString" />
+      <Variable x:TypeArguments="s:String[]" Name="nameArray" />
+      <Variable x:TypeArguments="x:String" Name="dataTime" />
+      <Variable x:TypeArguments="x:Int32" Name="dateIndex" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: New Tab" sap:VirtualizedContainerService.HintSize="484,1348" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" ScopeGuid="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" Version="V2">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1386,54" sap2010:WorkflowViewState.IdRef="CommentOut_23">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="644,2182" sap2010:WorkflowViewState.IdRef="Sequence_34">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: New Tab" sap:VirtualizedContainerService.HintSize="582,2071" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" ScopeGuid="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" Version="V2">
+            <uix:NApplicationCard.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="548,1852" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'editable text'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="486,54" sap2010:WorkflowViewState.IdRef="NTypeInto_9" InteractionMode="HardwareEvents" ScopeIdentifier="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" Text="whatsap web[k(Enter)]" Version="V3">
+                    <uix:NTypeInto.Target>
+                      <uix:TargetAnchorable CvElementArea="139, 57, 700, 40" CvType="InputBox" DesignTimeRectangle="180, 64, 584, 27" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl name='New Tab - Memory usage - 53.7 MB - Google Chrome - Abhishek' role='pane' /&gt;&lt;ctrl name='Address and search bar' role='editable text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='New Tab - Memory usage - 53.7 MB - Google Chrome - Abhishek' role='pane' /&gt;&lt;ctrl name='Address and search bar' role='editable text' automationid='' /&gt;" Guid="371d3e02-81d0-4521-a12f-96beca2a66bc" InformativeScreenshot="00e1826a2fda9c0a1ab8405e3d56a036.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='New Tab - Google Chrome' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
+                    </uix:NTypeInto.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NTypeInto>
+                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'WhatsApp Web'" sap:VirtualizedContainerService.HintSize="486,54" sap2010:WorkflowViewState.IdRef="NClick_5" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" Version="V3">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable BrowserURL="https://www.google.com/search?q=whatsap+web&amp;rlz=1C1RXQR_enIN1078IN1078&amp;oq=w&amp;gs_lcrp=EgZjaHJvbWUqCAgBEEUYJxg7MgYIABBFGDwyCAgBEEUYJxg7MhIIAhAAGEMYgwEYsQMYgAQYigUyBggDEEUYOzIGCAQQRRg9MgYIBRBFGDwyBggGEEUYPDIGCAcQRRg80gEIMjA0MGowajeoAgCwAgA&amp;sourceid=chrome&amp;ie=UTF-8" CvTextArea="78, 447, 117, 18" CvTextArgument="WhatsApp Web" CvType="Text" DesignTimeRectangle="80, 440, 114, 27" DesignTimeScaleFactor="0.8250000476837158" ElementType="Text" FriendlyName="'WhatsApp Web'" FullSelectorArgument="&lt;webctrl tag='H3' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='H3' type='' class='LC20lb MBeuO DKV0Md' aaname='WhatsApp Web' check:innerText='WhatsApp Web' /&gt;" Guid="cd7ca4fb-a2d6-4fb6-b944-9cda00ce79c4" InformativeScreenshot="4907fa93c1b6e2fa45d3658705b6e94a.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='whatsap web - Google Search' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
+                    </uix:NClick.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NClick>
+                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'P'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="486,54" sap2010:WorkflowViewState.IdRef="NTypeInto_10" ScopeIdentifier="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" Text="[groupName + &quot;[k(Enter)]&quot;]" Version="V3">
+                    <uix:NTypeInto.Target>
+                      <uix:TargetAnchorable BrowserURL="https://web.whatsapp.com/" CvElementArea="15, 249, 371, 33" CvType="InputBox" DesignTimeRectangle="72, 258, 285, 18" DesignTimeScaleFactor="0.8250000476837158" FriendlyName="'P'" FullSelectorArgument="&lt;webctrl tag='P' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='P' type='' class='selectable-text copyable-text iq0m558w g0rxnol2' aaname='' /&gt;" Guid="62316f54-8983-448c-b17c-26156547552d" InformativeScreenshot="fa576e4156621f22b8eb40847ef51825.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
+                    </uix:NTypeInto.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NTypeInto>
+                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="486,349" sap2010:WorkflowViewState.IdRef="CommentOut_20">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,270" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Testing Share11:51'" sap:VirtualizedContainerService.HintSize="388,159" sap2010:WorkflowViewState.IdRef="NClick_6" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" Version="V3">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable BrowserURL="https://web.whatsapp.com/" DesignTimeRectangle="72, 346, 342, 59" DesignTimeScaleFactor="0.8250000476837158" FriendlyName="'Testing Share11:51'" FullSelectorArgument="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div' idx='14' parentid='pane-side' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' class='_8nE1Y' parentid='pane-side' tag='DIV' aaname='' check:innerText='Testing Share&amp;#xD;&amp;#xA;11:51 AM&amp;#xD;&amp;#xA;V@run Kothari&amp;#xD;&amp;#xA;: &amp;#xD;&amp;#xA;Unbelievable  All are customer of SEPC' /&gt;" Guid="51e88889-c165-41d2-b3eb-8f391a229880" InformativeScreenshot="43c53936c990cedb632e0bc3985f53c8.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" />
+                          </uix:NClick.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NClick>
+                      </Sequence>
+                    </ui:CommentOut.Body>
+                  </ui:CommentOut>
+                  <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="486,92" sap2010:WorkflowViewState.IdRef="Delay_5">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Delay>
+                  <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="486,247" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Please enter your name. If there is more than one name, indicate it with a comma." Title="Please enter persons name ">
+                    <ui:InputDialog.Result>
+                      <OutArgument x:TypeArguments="x:String">[nameString]</OutArgument>
+                    </ui:InputDialog.Result>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InputDialog>
+                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="486,337" sap2010:WorkflowViewState.IdRef="CommentOut_8">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,258" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,147" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[nameString]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:LogMessage>
+                      </Sequence>
+                    </ui:CommentOut.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:CommentOut>
+                  <Assign sap:VirtualizedContainerService.HintSize="486,84" sap2010:WorkflowViewState.IdRef="Assign_1">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:String[]">[nameArray]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:String[]">[nameString.Split(",")]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="486,54" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[nameArray]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="x:String">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:String" Name="currentItem" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="776,3531" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:String" Name="messageString" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="734,54" sap2010:WorkflowViewState.IdRef="CommentOut_9">
+                            <ui:CommentOut.Body>
+                              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,165" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,54" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[currentItem]">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:LogMessage>
+                              </Sequence>
+                            </ui:CommentOut.Body>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:CommentOut>
+                          <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="734,2962" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1">
+                            <ueab:ExcelProcessScopeX.Body>
+                              <ActivityAction x:TypeArguments="ui:IExcelProcess">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
+                                </ActivityAction.Argument>
+                                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="700,2875" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                                  <Sequence.Variables>
+                                    <Variable x:TypeArguments="sd:DataTable" Name="outputDataTable" />
+                                  </Sequence.Variables>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[outputDataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="638,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="DataSheet" WorkbookPath="Data.xlsx">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:ReadRange>
+                                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="638,54" sap2010:WorkflowViewState.IdRef="CommentOut_10">
+                                    <ui:CommentOut.Body>
+                                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,165" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,54" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[outputDataTable.Rows(0)(&quot;Person Name&quot;)]">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </ui:LogMessage>
+                                      </Sequence>
+                                    </ui:CommentOut.Body>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:CommentOut>
+                                  <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[outputDataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="638,2355" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                                    <ui:ForEachRow.Body>
+                                      <ActivityAction x:TypeArguments="sd:DataRow">
+                                        <ActivityAction.Argument>
+                                          <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                                        </ActivityAction.Argument>
+                                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="604,2165" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="562,54" sap2010:WorkflowViewState.IdRef="CommentOut_11">
+                                            <ui:CommentOut.Body>
+                                              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,165" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="388,54" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[(CurrentRow(&quot;Person Name&quot;))]">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </ui:MessageBox>
+                                              </Sequence>
+                                            </ui:CommentOut.Body>
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                          </ui:CommentOut>
+                                          <If Condition="[currentItem.Equals(CurrentRow(&quot;Person Name&quot;))]" sap:VirtualizedContainerService.HintSize="562,1983" sap2010:WorkflowViewState.IdRef="If_2">
+                                            <If.Then>
+                                              <Sequence sap:VirtualizedContainerService.HintSize="528,1799" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="486,147" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[dataDate+&quot; date  previous&quot;]" />
+                                                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="486,87" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[CurrentRow(&quot;Date And Time&quot;).ToString]" />
+                                                <Assign sap:VirtualizedContainerService.HintSize="486,84" sap2010:WorkflowViewState.IdRef="Assign_2">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[dataDate]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">[CurrentRow("Date And Time").ToString]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="486,147" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[dataDate+&quot; date &quot;]" />
+                                                <Assign sap:VirtualizedContainerService.HintSize="486,84" sap2010:WorkflowViewState.IdRef="Assign_11">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[description]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">[CurrentRow("Description").ToString]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="486,337" sap2010:WorkflowViewState.IdRef="CommentOut_12">
+                                                  <ui:CommentOut.Body>
+                                                    <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,258" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,147" sap2010:WorkflowViewState.IdRef="LogMessage_10" Message="[dataDate]">
+                                                        <sap:WorkflowViewStateService.ViewState>
+                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                          </scg:Dictionary>
+                                                        </sap:WorkflowViewStateService.ViewState>
+                                                      </ui:LogMessage>
+                                                    </Sequence>
+                                                  </ui:CommentOut.Body>
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </ui:CommentOut>
+                                                <Assign sap:VirtualizedContainerService.HintSize="486,84" sap2010:WorkflowViewState.IdRef="Assign_4">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[tempObject]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">["{" + currentItem + ":" + dataDate + "}"]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="486,337" sap2010:WorkflowViewState.IdRef="CommentOut_19">
+                                                  <ui:CommentOut.Body>
+                                                    <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,258" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,147" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[tempObject]">
+                                                        <sap:WorkflowViewStateService.ViewState>
+                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                          </scg:Dictionary>
+                                                        </sap:WorkflowViewStateService.ViewState>
+                                                      </ui:LogMessage>
+                                                    </Sequence>
+                                                  </ui:CommentOut.Body>
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </ui:CommentOut>
+                                                <Assign sap:VirtualizedContainerService.HintSize="486,84" sap2010:WorkflowViewState.IdRef="Assign_8">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[personName]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">[currentItem]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                              </Sequence>
+                                            </If.Then>
+                                            <If.Else>
+                                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_10" />
+                                            </If.Else>
+                                          </If>
+                                        </Sequence>
+                                      </ActivityAction>
+                                    </ui:ForEachRow.Body>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:ForEachRow>
+                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="638,147" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;person last information :-  &quot;+personName+&quot;   &quot;+dataDate+&quot;   &quot;+description]" />
+                                </Sequence>
+                              </ActivityAction>
+                            </ueab:ExcelProcessScopeX.Body>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ueab:ExcelProcessScopeX>
+                          <uix:NExtractData AppendResults="False" ContinueOnError="True" DisplayName="Extract Table Data" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured' AddCvHeader='true' IsScrollEnabled='false'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' Name='New column 0' ReferenceName='Column0'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column0' attr='fulltext'&gt;&lt;webctrl tag='div' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="734,159" sap2010:WorkflowViewState.IdRef="NExtractData_1" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" Version="V3">
+                            <uix:NExtractData.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="419, -3974, 610, 4911" DesignTimeScaleFactor="0.8250000476837158" FriendlyName="'10/14/2023Arpit InfoTha…'" FullSelectorArgument="&lt;webctrl aria-role='application' tag='DIV' /&gt;" Guid="2e220b93-e549-4065-ac87-122a1fc4ae69" InformativeScreenshot="c21c0ae0925fa0d3e6c5cff01984db35.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                            </uix:NExtractData.Target>
+                          </uix:NExtractData>
+                          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="734,54" sap2010:WorkflowViewState.IdRef="CommentOut_21">
+                            <ui:CommentOut.Body>
+                              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,270" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <uix:NGetText DisplayName="Get Text 'ForwardedUnbelievable A…'" sap:VirtualizedContainerService.HintSize="388,159" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" TextString="[messageString]" Version="V3">
+                                  <uix:NGetText.Target>
+                                    <uix:TargetAnchorable BrowserURL="https://web.whatsapp.com/" DesignTimeRectangle="478, 599, 222, 60" DesignTimeScaleFactor="0.8250000476837158" FriendlyName="'ForwardedUnbelievable A…'" FullSelectorArgument="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div' idx='62' parentid='main' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' class='cm280p3y to2l77zo n1yiu2zv ft2m32mm oq31bsqd e1yunedv' parentid='main' tag='DIV' aaname='' /&gt;" Guid="fb2ebfb4-d8a8-4308-b85e-8cd3e44a628d" ImageBase64="" InformativeScreenshot="fb4f6d1623fe80ebefeb21bb4041f071.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive">
+                                      <uix:TargetAnchorable.Anchors>
+                                        <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                          <uix:Target CvElementArea="571, 617, 17, 19" CvType="Icon" DesignTimeRectangle="572, 619, 16, 16" ElementType="Icon" FriendlyName="'IMG'" FullSelectorArgument="&lt;webctrl idx='28' parentid='main' src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAA*' tabindex='-1' tag='IMG' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' parentid='main' src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAA*' tabindex='-1' tag='IMG' class='b38 emoji wa _11JPr selectable-text copyable-text' aaname='' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI8SURBVDhPxdHdS1NhHMDx/omwICwje2MaMyQjQyrMAlE0L62uIkJI+g8kqAujvGmBVEiySA0Vs6aLkl5MtImp+TLTLXXmnG62Fzd3do7nW9ITMs5x7iLoc3XO8/ud78V5tvGP/Z9gxDsnnra2ZXDFN0e0pZiRxuviJLGEQSW2iue+kaCljNhgOa6Gy2KyuYRBVV1j5kEeA1Up+GwFBHsL8dqtYqovqX/oqMlhsDoFyXGR5dZsVCUmJlpJBeWIn7GqdCZrc1EnSvneeF5MtHSD6pqC8+lVpltL8HVeYLG9lIknl7BWbkcZKMbfk014YVhsx9MEnb1NzD8vgm8VrI6XoM5eQZ28AaMVzNZnYTcZULrymak7LL6Ipwku2N/jNhcwW3eaqc6bTLRXMl2biey6xpqjHL6U4Hl1ksDro8QiP8VXGzTB0JKT4ZozxIIecQLLI+9YsRYSs5ehjOciDZ0i9CGfwPyo2NigCX59Y0KyVTJpzhMnf8w8K0IZO440nkn0s5HFpoNiEk/3UvwtOUS6i3BbbyGvhpD8P4i0nf19IceQ+jMIdxhwPUwT2/F0g7Z7ewlbsmCoFE+zEfnlORTbCeTeI8hvjYTMBtyfTGI7nm4w4OjG/WgXPouBwMd0pK5MQj0ZRDsO4G8+xNSdNOToitiOpxtc57OZcT1OIfgiDal1Dx5LKktt+5gz7cfbVy+2tDYNrvP1mXHe3c1C/U4Wa3dgv52Kt79BTPUlDP4VcY8gh5fFW2JJBZMHvwC0fseOLlGi8wAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, CV" />
+                                        </scg:List>
+                                      </uix:TargetAnchorable.Anchors>
+                                    </uix:TargetAnchorable>
+                                  </uix:NGetText.Target>
+                                </uix:NGetText>
+                              </Sequence>
+                            </ui:CommentOut.Body>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:CommentOut>
+                          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="734,54" sap2010:WorkflowViewState.IdRef="CommentOut_22">
+                            <ui:CommentOut.Body>
+                              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,258" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,147" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[messageString]" />
+                              </Sequence>
+                            </ui:CommentOut.Body>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:CommentOut>
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ForEach>
+                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="486,54" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </ui:CommentOut.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:CommentOut>
+                </Sequence>
+              </ActivityAction>
+            </uix:NApplicationCard.Body>
+            <uix:NApplicationCard.TargetApp>
+              <uix:TargetApp Area="-8, -8, 1040, 736" BrowserType="Chrome" IconBase64="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" InformativeScreenshot="ccb1d0d9db189d5fd99e5afcc8656744.png" Selector="&lt;html app='chrome.exe' title='New Tab' /&gt;" Title="New Tab" Url="chrome://newtab/" />
+            </uix:NApplicationCard.TargetApp>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </uix:NApplicationCard>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1386,54" sap2010:WorkflowViewState.IdRef="CommentOut_24">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="820,3178" sap2010:WorkflowViewState.IdRef="Sequence_48">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: New Tab" sap:VirtualizedContainerService.HintSize="758,1501" sap2010:WorkflowViewState.IdRef="NApplicationCard_3" InteractionMode="DebuggerApi" ScopeGuid="4950a490-6b18-4ce2-991a-b44b1e59be27" Version="V2">
+            <uix:NApplicationCard.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="724,2848" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="currentDate" />
+                    <Variable x:TypeArguments="x:String" Name="variable2" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'editable text'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="662,54" sap2010:WorkflowViewState.IdRef="NTypeInto_11" InteractionMode="HardwareEvents" ScopeIdentifier="4950a490-6b18-4ce2-991a-b44b1e59be27" Text="[applicationName + &quot;[k(Enter)]&quot;]" Version="V3">
+                    <uix:NTypeInto.Target>
+                      <uix:TargetAnchorable CvElementArea="141, 57, 656, 39" CvType="InputBox" DesignTimeRectangle="180, 64, 545, 27" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl name='New Tab - Memory usage - 62.4 MB - Google Chrome' role='pane' /&gt;&lt;ctrl name='Address and search bar' role='editable text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='New Tab - Memory usage - 62.4 MB - Google Chrome' role='pane' /&gt;&lt;ctrl name='Address and search bar' role='editable text' automationid='' /&gt;" Guid="6001cd6b-3118-4622-9756-580bd3eda599" InformativeScreenshot="2830654812433d0a942a426849bc5ae8.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='New Tab - Google Chrome' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
+                    </uix:NTypeInto.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NTypeInto>
+                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'WhatsApp Web'" sap:VirtualizedContainerService.HintSize="662,54" sap2010:WorkflowViewState.IdRef="NClick_7" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="4950a490-6b18-4ce2-991a-b44b1e59be27" Version="V3">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable BrowserURL="https://www.google.com/search?q=whatsapp+web&amp;rlz=1C1RXQR_enIN1078IN1078&amp;oq=whats&amp;gs_lcrp=EgZjaHJvbWUqDggAEEUYJxg7GIAEGIoFMg4IABBFGCcYOxiABBiKBTIGCAEQRRg7MggIAhBFGCcYOzIGCAMQRRhAMgYIBBBFGDwyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxNjE0ajBqN6gCALACAA&amp;sourceid=chrome&amp;ie=UTF-8" CvTextArea="78, 379, 117, 18" CvTextArgument="WhatsApp Web" CvType="Text" DesignTimeRectangle="80, 372, 114, 27" DesignTimeScaleFactor="0.8250000476837158" ElementType="Text" FriendlyName="'WhatsApp Web'" FullSelectorArgument="&lt;webctrl tag='H3' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='H3' type='' class='LC20lb MBeuO DKV0Md' aaname='WhatsApp Web' check:innerText='WhatsApp Web' /&gt;" Guid="55704cb7-a284-44f4-8c8d-38647090d6b7" InformativeScreenshot="01165cbbb0f5bea39c55a991828bd853.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='whatsapp web - Google Search' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
+                    </uix:NClick.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NClick>
+                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'P'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="662,54" sap2010:WorkflowViewState.IdRef="NTypeInto_12" ScopeIdentifier="4950a490-6b18-4ce2-991a-b44b1e59be27" Text="[groupName + &quot;[k(Enter)]&quot;]" Version="V3">
+                    <uix:NTypeInto.Target>
+                      <uix:TargetAnchorable BrowserURL="https://web.whatsapp.com/" CvElementArea="15, 192, 372, 35" CvType="InputBox" DesignTimeRectangle="72, 201, 285, 18" DesignTimeScaleFactor="0.8250000476837158" FriendlyName="'P'" FullSelectorArgument="&lt;webctrl tag='P' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='P' type='' class='selectable-text copyable-text iq0m558w g0rxnol2' aaname='' /&gt;" Guid="c82aac66-c660-4f6e-83dd-53c1fbe4980d" InformativeScreenshot="f305120b3e9132cf62b7e2ddfe8f40da.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
+                    </uix:NTypeInto.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NTypeInto>
+                  <Assign sap:VirtualizedContainerService.HintSize="662,84" sap2010:WorkflowViewState.IdRef="Assign_12">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[currentDate]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[System.DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss").Substring(0,10)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="662,54" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[currentDate]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:LogMessage>
+                  <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[temp]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="662,2233" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+                    <ui:InterruptibleDoWhile.Body>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="628,2095" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="x:String" Name="getTextDate" />
+                          <Variable x:TypeArguments="sd:DataTable" Name="dataTable" />
+                        </Sequence.Variables>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uix:NMouseScroll KeyModifiers="{x:Null}" Direction="Up" DisplayName="Mouse Scroll" sap:VirtualizedContainerService.HintSize="586,139" sap2010:WorkflowViewState.IdRef="NMouseScroll_1" InteractionMode="HardwareEvents" MovementUnits="1" Version="V3">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NMouseScroll>
+                        <uix:NExtractData AppendResults="False" ContinueOnError="True" DataTable="[dataTable]" DisplayName="Extract Table Data" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured' AddCvHeader='true' IsScrollEnabled='false'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' Name='New column 0' ReferenceName='Column0'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column0' attr='fulltext'&gt;&lt;webctrl tag='div' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='span' idx='1' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="586,159" sap2010:WorkflowViewState.IdRef="NExtractData_2" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="4950a490-6b18-4ce2-991a-b44b1e59be27" Version="V3">
+                          <uix:NExtractData.Target>
+                            <uix:TargetAnchorable DesignTimeRectangle="419, -1483, 610, 3699" DesignTimeScaleFactor="0.8250000476837158" FriendlyName="'10/27/2023Gotam Info3:53'" FullSelectorArgument="&lt;webctrl aria-role='application' tag='DIV' /&gt;" Guid="44061ea3-1042-4c5b-8744-d76d583ee8f7" InformativeScreenshot="c4c1bd32eec04046e415290b2b770465.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                          </uix:NExtractData.Target>
+                        </uix:NExtractData>
+                        <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="586,1629" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+                          <ui:ForEachRow.Body>
+                            <ActivityAction x:TypeArguments="sd:DataRow">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                              </ActivityAction.Argument>
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="552,1439" sap2010:WorkflowViewState.IdRef="Sequence_42">
+                                <Sequence.Variables>
+                                  <Variable x:TypeArguments="x:String" Name="dataTableDate" />
+                                </Sequence.Variables>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign sap:VirtualizedContainerService.HintSize="510,84" sap2010:WorkflowViewState.IdRef="Assign_15">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[dataTableDate]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">[(CurrentRow(0).ToString).Trim()]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <If Condition="[dataTableDate.Equals(data_Date)]" sap:VirtualizedContainerService.HintSize="510,1227" sap2010:WorkflowViewState.IdRef="If_4">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <If.Then>
+                                    <Sequence sap:VirtualizedContainerService.HintSize="476,871" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Extensions'" sap:VirtualizedContainerService.HintSize="434,54" sap2010:WorkflowViewState.IdRef="NClick_8" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="4950a490-6b18-4ce2-991a-b44b1e59be27" Version="V3">
+                                        <uix:NClick.Target>
+                                          <uix:TargetAnchorable CvElementArea="812, 60, 35, 33" CvType="Icon" DesignTimeRectangle="811, 58, 38, 38" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Extensions'" FullSelectorArgument="&lt;ctrl name='WhatsApp - Memory usage - 221 MB - Google Chrome' role='pane' /&gt;&lt;ctrl name='Extensions' role='menu button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='WhatsApp - Memory usage - 221 MB - Google Chrome' role='pane' /&gt;&lt;ctrl name='Extensions' role='menu button' automationid='' check:text='Extensions' /&gt;" Guid="f20394c8-8563-4690-9485-1ef5d5fde903" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHCSURBVFhH7ZbPq0FREMfffyel/EjJwtZSblixEBsrC6xkpbCUnVJWfmz92CiykSXZUIrmdac5t57FfWduk5fX+dR3cWeaM5/knu4XfAhGVBojKo0RlcaISmNEpREVPZ/P0O/3Yb1eU0UOMdHj8QiRSAR8Ph+m1+tRRwbPotvtFpbLpZNyuexI2gkEArBYLJz+arWC+/1O03zYoo/HA9Lp9A8p3YRCIc9/C7bo4XDApdFoFLLZrHaSySTOtVotOokHW3S32+HCfD5PFT0mkwnO1Wo1qvD4/6KxWAxfEl2m0ynO1et1qvBgi55OJ8hkMrg0GAzisw5KNJFIwGAwgOfzSR092KKKarWKi9vtNlXcUaIq3W6XOnp4Ft1sNriwUChQxZ1XUcuyqKOHZ9HxeIwLK5UKVdx5FS2VStTRgy16u91gNptBPB7HhfP5nDruKFG/3w/FYhEulwt19GCLqrfeTrPZpOrvKNG3X0+5XI4qeijRt11PH3Ph7/d7XJhKpZwvI510Oh2cazQadBIPtuj1eoVwOIxLvWQ0GtFJPNiiNvaval/03AyHQzqBjyfRv8CISmNEpTGi0hhRaYyoNB8iCvAN1SNwZ1ZbtS0AAAAASUVORK5CYII=" InformativeScreenshot="a086bab262035b74aa7416c6ee4d0a5e.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='WhatsApp - Google Chrome' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
+                                        </uix:NClick.Target>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </uix:NClick>
+                                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Instant Data Scraper'" sap:VirtualizedContainerService.HintSize="434,159" sap2010:WorkflowViewState.IdRef="NClick_9" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="4950a490-6b18-4ce2-991a-b44b1e59be27" Version="V3">
+                                        <uix:NClick.Target>
+                                          <uix:TargetAnchorable CvTextArea="73, 197, 120, 15" CvTextArgument="Instant Data Scraper" CvType="Text" DesignTimeRectangle="29, 178, 213, 50" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Instant Data Scraper'" FullSelectorArgument="&lt;ctrl name='Instant Data Scraper' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Instant Data Scraper' role='push button' automationid='' check:fulltext='Instant Data Scraper' /&gt;" Guid="c5edf8d9-4a29-4d42-bdab-b5c7eb79e630" InformativeScreenshot="482c19832ff4ebc3fd6d991bb16529bf.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='Extensions' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
+                                        </uix:NClick.Target>
+                                      </uix:NClick>
+                                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click" sap:VirtualizedContainerService.HintSize="434,169" sap2010:WorkflowViewState.IdRef="NClick_10" KeyModifiers="None" MouseButton="Left" Version="V3" />
+                                      <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_13">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:Boolean">[temp]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                      <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="Delay_6" />
+                                      <ui:Break sap:VirtualizedContainerService.HintSize="434,25" sap2010:WorkflowViewState.IdRef="Break_1" />
+                                    </Sequence>
+                                  </If.Then>
+                                  <If.Else>
+                                    <Sequence sap:VirtualizedContainerService.HintSize="476,172" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_14">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:Boolean">[temp]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:Boolean">[True]</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                    </Sequence>
+                                  </If.Else>
+                                </If>
+                              </Sequence>
+                            </ActivityAction>
+                          </ui:ForEachRow.Body>
+                        </ui:ForEachRow>
+                      </Sequence>
+                    </ui:InterruptibleDoWhile.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InterruptibleDoWhile>
+                </Sequence>
+              </ActivityAction>
+            </uix:NApplicationCard.Body>
+            <uix:NApplicationCard.TargetApp>
+              <uix:TargetApp Area="-8, -8, 1040, 736" BrowserType="Chrome" IconBase64="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" InformativeScreenshot="aab0cbe5d8e4ea9db984d82e4b2f6852.png" Selector="&lt;html app='chrome.exe' title='New Tab' /&gt;" Title="New Tab" Url="chrome://newtab/" />
+            </uix:NApplicationCard.TargetApp>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </uix:NApplicationCard>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: WhatsApp" sap:VirtualizedContainerService.HintSize="1386,5992" sap2010:WorkflowViewState.IdRef="NApplicationCard_4" InteractionMode="DebuggerApi" ScopeGuid="0ad32779-1ecd-413a-9940-7069ba5d6499" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,1129" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1352,5773" sap2010:WorkflowViewState.IdRef="Sequence_43">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'editable text'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,222" sap2010:WorkflowViewState.IdRef="NTypeInto_6" InteractionMode="HardwareEvents" ScopeIdentifier="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" Text="whatsap web[k(Enter)]" Version="V3">
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'DIV'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="1290,54" sap2010:WorkflowViewState.IdRef="NTypeInto_13" ScopeIdentifier="0ad32779-1ecd-413a-9940-7069ba5d6499" Text="[groupName + &quot;[k(Enter)]&quot;]" Version="V3">
               <uix:NTypeInto.Target>
-                <uix:TargetAnchorable CvElementArea="139, 57, 700, 40" CvType="InputBox" DesignTimeRectangle="180, 64, 584, 27" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'editable text'" FullSelectorArgument="&lt;ctrl name='New Tab - Memory usage - 53.7 MB - Google Chrome - Abhishek' role='pane' /&gt;&lt;ctrl name='Address and search bar' role='editable text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='New Tab - Memory usage - 53.7 MB - Google Chrome - Abhishek' role='pane' /&gt;&lt;ctrl name='Address and search bar' role='editable text' automationid='' /&gt;" Guid="371d3e02-81d0-4521-a12f-96beca2a66bc" InformativeScreenshot="00e1826a2fda9c0a1ab8405e3d56a036.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='New Tab - Google Chrome' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
+                <uix:TargetAnchorable BrowserURL="https://web.whatsapp.com/" CvTextArea="70, 202, 125, 12" CvTextArgument="Search or start new chat" CvType="Text" DesignTimeRectangle="18, 195, 365, 29" DesignTimeScaleFactor="0.8250000476837158" FriendlyName="'DIV'" FullSelectorArgument="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div' idx='2' parentid='side' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' class='_2vDPL' parentid='side' tag='DIV' aaname='' /&gt;" Guid="b24fd67b-7b27-4b5c-aaf3-0fae425912bc" InformativeScreenshot="8149f6fc96fe8bce6e1e6eda48a93362.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
               </uix:NTypeInto.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </uix:NTypeInto>
-            <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'WhatsApp Web'" sap:VirtualizedContainerService.HintSize="388,159" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" Version="V3">
-              <uix:NClick.Target>
-                <uix:TargetAnchorable BrowserURL="https://www.google.com/search?q=whatsap+web&amp;rlz=1C1RXQR_enIN1078IN1078&amp;oq=w&amp;gs_lcrp=EgZjaHJvbWUqCAgBEEUYJxg7MgYIABBFGDwyCAgBEEUYJxg7MhIIAhAAGEMYgwEYsQMYgAQYigUyBggDEEUYOzIGCAQQRRg9MgYIBRBFGDwyBggGEEUYPDIGCAcQRRg80gEIMjA0MGowajeoAgCwAgA&amp;sourceid=chrome&amp;ie=UTF-8" CvTextArea="78, 447, 117, 18" CvTextArgument="WhatsApp Web" CvType="Text" DesignTimeRectangle="80, 440, 114, 27" DesignTimeScaleFactor="0.8250000476837158" ElementType="Text" FriendlyName="'WhatsApp Web'" FullSelectorArgument="&lt;webctrl tag='H3' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='H3' type='' class='LC20lb MBeuO DKV0Md' aaname='WhatsApp Web' check:innerText='WhatsApp Web' /&gt;" Guid="cd7ca4fb-a2d6-4fb6-b944-9cda00ce79c4" InformativeScreenshot="4907fa93c1b6e2fa45d3658705b6e94a.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='whatsap web - Google Search' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
-              </uix:NClick.Target>
-            </uix:NClick>
-            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'P'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,222" sap2010:WorkflowViewState.IdRef="NTypeInto_8" ScopeIdentifier="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" Text="[groupName + &quot;[k(Enter)]&quot;]" Version="V3">
-              <uix:NTypeInto.Target>
-                <uix:TargetAnchorable BrowserURL="https://web.whatsapp.com/" CvElementArea="15, 249, 371, 33" CvType="InputBox" DesignTimeRectangle="72, 258, 285, 18" DesignTimeScaleFactor="0.8250000476837158" FriendlyName="'P'" FullSelectorArgument="&lt;webctrl tag='P' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='P' type='' class='selectable-text copyable-text iq0m558w g0rxnol2' aaname='' /&gt;" Guid="62316f54-8983-448c-b17c-26156547552d" InformativeScreenshot="fa576e4156621f22b8eb40847ef51825.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V2" Visibility="Interactive" />
-              </uix:NTypeInto.Target>
-            </uix:NTypeInto>
-            <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Testing Share11:51'" sap:VirtualizedContainerService.HintSize="388,159" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="4bd99bf9-b0ad-4a1a-a493-7174c74801e9" Version="V3">
-              <uix:NClick.Target>
-                <uix:TargetAnchorable BrowserURL="https://web.whatsapp.com/" DesignTimeRectangle="72, 346, 342, 59" DesignTimeScaleFactor="0.8250000476837158" FriendlyName="'Testing Share11:51'" FullSelectorArgument="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div' idx='14' parentid='pane-side' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' class='_8nE1Y' parentid='pane-side' tag='DIV' aaname='' check:innerText='Testing Share&amp;#xD;&amp;#xA;11:51 AM&amp;#xD;&amp;#xA;V@run Kothari&amp;#xD;&amp;#xA;: &amp;#xD;&amp;#xA;Unbelievable  All are customer of SEPC' /&gt;" Guid="51e88889-c165-41d2-b3eb-8f391a229880" InformativeScreenshot="43c53936c990cedb632e0bc3985f53c8.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" SearchSteps="Selector, FuzzySelector" Version="V2" Visibility="Interactive" />
-              </uix:NClick.Target>
-            </uix:NClick>
-            <Delay Duration="00:00:10" sap:VirtualizedContainerService.HintSize="388,92" sap2010:WorkflowViewState.IdRef="Delay_5" />
+            <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="1290,54" sap2010:WorkflowViewState.IdRef="InputDialog_2" IsPassword="False" Label="Please enter your name. If there is more than one name, indicate it with a comma." Title="Please enter persons name ">
+              <ui:InputDialog.Result>
+                <OutArgument x:TypeArguments="x:String">[nameString]</OutArgument>
+              </ui:InputDialog.Result>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InputDialog>
+            <Assign sap:VirtualizedContainerService.HintSize="1290,84" sap2010:WorkflowViewState.IdRef="Assign_19">
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:String[]">[nameArray]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:String[]">[nameString.Split(",")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="1290,5346" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[nameArray]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="x:String">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:String" Name="currentItem" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1256,5156" sap2010:WorkflowViewState.IdRef="Sequence_49">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="messageString" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1214,54" sap2010:WorkflowViewState.IdRef="CommentOut_25">
+                      <ui:CommentOut.Body>
+                        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,165" sap2010:WorkflowViewState.IdRef="Sequence_51">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,54" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[currentItem]">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:LogMessage>
+                        </Sequence>
+                      </ui:CommentOut.Body>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:CommentOut>
+                    <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="1214,4974" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_2">
+                      <ueab:ExcelProcessScopeX.Body>
+                        <ActivityAction x:TypeArguments="ui:IExcelProcess">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1180,4887" sap2010:WorkflowViewState.IdRef="Sequence_50">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="sd:DataTable" Name="outputDataTable" />
+                            </Sequence.Variables>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[outputDataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="1118,54" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="DataSheet" WorkbookPath="Data.xlsx">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:ReadRange>
+                            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1118,54" sap2010:WorkflowViewState.IdRef="CommentOut_26">
+                              <ui:CommentOut.Body>
+                                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,165" sap2010:WorkflowViewState.IdRef="Sequence_52">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,54" sap2010:WorkflowViewState.IdRef="LogMessage_21" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[outputDataTable.Rows(0)(&quot;Person Name&quot;)]">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:LogMessage>
+                                </Sequence>
+                              </ui:CommentOut.Body>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:CommentOut>
+                            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[outputDataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="1118,54" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+                              <ui:ForEachRow.Body>
+                                <ActivityAction x:TypeArguments="sd:DataRow">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="552,1190" sap2010:WorkflowViewState.IdRef="Sequence_58">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <If Condition="[currentItem.Equals(CurrentRow(&quot;Person Name&quot;))]" sap:VirtualizedContainerService.HintSize="510,1102" sap2010:WorkflowViewState.IdRef="If_6">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <If.Then>
+                                        <Sequence sap:VirtualizedContainerService.HintSize="476,918" sap2010:WorkflowViewState.IdRef="Sequence_56">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,147" sap2010:WorkflowViewState.IdRef="LogMessage_33" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[&quot;for each row in data table data.xlsx &quot;+currentItem]" />
+                                          <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_20">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[dataDate]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[CurrentRow("Date").ToString]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_24">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[dataTime]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[CurrentRow("Time").ToString]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_21">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[description]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[CurrentRow("Description").ToString]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_23">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[personName]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[currentItem]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,147" sap2010:WorkflowViewState.IdRef="LogMessage_31" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[count]" />
+                                        </Sequence>
+                                      </If.Then>
+                                      <If.Else>
+                                        <Sequence sap:VirtualizedContainerService.HintSize="300,82" sap2010:WorkflowViewState.IdRef="Sequence_57">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </Sequence>
+                                      </If.Else>
+                                    </If>
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:ForEachRow.Body>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:ForEachRow>
+                            <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[temp]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="1118,4494" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+                              <ui:InterruptibleDoWhile.Body>
+                                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1084,4356" sap2010:WorkflowViewState.IdRef="Sequence_44">
+                                  <Sequence.Variables>
+                                    <Variable x:TypeArguments="x:String" Name="getTextDate" />
+                                    <Variable x:TypeArguments="sd:DataTable" Name="dataTable" />
+                                  </Sequence.Variables>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <uix:NMouseScroll KeyModifiers="{x:Null}" Direction="Up" DisplayName="Mouse Scroll" sap:VirtualizedContainerService.HintSize="1042,54" sap2010:WorkflowViewState.IdRef="NMouseScroll_2" InteractionMode="HardwareEvents" MovementUnits="1" Version="V3">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </uix:NMouseScroll>
+                                  <uix:NExtractData AppendResults="False" ContinueOnError="True" DataTable="[dataTable]" DisplayName="Extract Table Data" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured' AddCvHeader='true' IsScrollEnabled='false'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' Name='New column 0' ReferenceName='Column0'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column0' attr='fulltext'&gt;&lt;webctrl tag='div' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='span' idx='1' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="1042,54" sap2010:WorkflowViewState.IdRef="NExtractData_3" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="0ad32779-1ecd-413a-9940-7069ba5d6499" Version="V3">
+                                    <uix:NExtractData.Target>
+                                      <uix:TargetAnchorable DesignTimeRectangle="419, -1483, 610, 3699" DesignTimeScaleFactor="0.8250000476837158" FriendlyName="'10/27/2023Gotam Info3:53'" FullSelectorArgument="&lt;webctrl aria-role='application' tag='DIV' /&gt;" Guid="44061ea3-1042-4c5b-8744-d76d583ee8f7" InformativeScreenshot="c4c1bd32eec04046e415290b2b770465.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                                    </uix:NExtractData.Target>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </uix:NExtractData>
+                                  <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="1042,4080" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+                                    <ui:ForEachRow.Body>
+                                      <ActivityAction x:TypeArguments="sd:DataRow">
+                                        <ActivityAction.Argument>
+                                          <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                                        </ActivityAction.Argument>
+                                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1008,3890" sap2010:WorkflowViewState.IdRef="Sequence_45">
+                                          <Sequence.Variables>
+                                            <Variable x:TypeArguments="x:String" Name="dataTableDate" />
+                                          </Sequence.Variables>
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <Assign sap:VirtualizedContainerService.HintSize="966,84" sap2010:WorkflowViewState.IdRef="Assign_16">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[dataTableDate]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[(CurrentRow(0).ToString).Trim()]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <If Condition="[dataTableDate.Equals(data_Date)]" sap:VirtualizedContainerService.HintSize="966,3678" sap2010:WorkflowViewState.IdRef="If_5">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <If.Then>
+                                              <Sequence sap:VirtualizedContainerService.HintSize="932,3494" sap2010:WorkflowViewState.IdRef="Sequence_46">
+                                                <Sequence.Variables>
+                                                  <Variable x:TypeArguments="x:Int32" Name="index" />
+                                                  <Variable x:TypeArguments="x:Int32" Name="indexSecondLoop" />
+                                                </Sequence.Variables>
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <uix:NExtractData AppendResults="False" ContinueOnError="True" DataTable="[dataTable]" DisplayName="Extract Table Data" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured' AddCvHeader='true' IsScrollEnabled='false'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' Name='New column 0' ReferenceName='Column0'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column0' attr='fulltext'&gt;&lt;webctrl tag='div' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="890,54" sap2010:WorkflowViewState.IdRef="NExtractData_4" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="0ad32779-1ecd-413a-9940-7069ba5d6499" Version="V3">
+                                                  <uix:NExtractData.Target>
+                                                    <uix:TargetAnchorable DesignTimeRectangle="419, -869, 610, 4945" DesignTimeScaleFactor="0.8250000476837158" FriendlyName="'10/14/2023Arpit InfoTha…'" FullSelectorArgument="&lt;webctrl aria-role='application' tag='DIV' /&gt;" Guid="67a5ef27-dc78-4ef2-8c93-237b11e193e7" InformativeScreenshot="bdd35bcfd22e96612ca48543f78d3210.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                                                  </uix:NExtractData.Target>
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </uix:NExtractData>
+                                                <ui:WriteRange StartingCell="{x:Null}" AddHeaders="False" DataTable="[dataTable]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="890,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="sheet1" WorkbookPath="Debug_Excel.xlsx">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </ui:WriteRange>
+                                                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[index]" DataTable="[dataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="890,54" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+                                                  <ui:ForEachRow.Body>
+                                                    <ActivityAction x:TypeArguments="sd:DataRow">
+                                                      <ActivityAction.Argument>
+                                                        <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                                                      </ActivityAction.Argument>
+                                                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="552,633" sap2010:WorkflowViewState.IdRef="Sequence_61">
+                                                        <Sequence.Variables>
+                                                          <Variable x:TypeArguments="x:Int32" Default="0" Name="count" />
+                                                        </Sequence.Variables>
+                                                        <sap:WorkflowViewStateService.ViewState>
+                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                          </scg:Dictionary>
+                                                        </sap:WorkflowViewStateService.ViewState>
+                                                        <Assign sap:VirtualizedContainerService.HintSize="510,84" sap2010:WorkflowViewState.IdRef="Assign_25">
+                                                          <Assign.To>
+                                                            <OutArgument x:TypeArguments="x:Int32">[count]</OutArgument>
+                                                          </Assign.To>
+                                                          <Assign.Value>
+                                                            <InArgument x:TypeArguments="x:Int32">[count+1]</InArgument>
+                                                          </Assign.Value>
+                                                        </Assign>
+                                                        <If Condition="[(CurrentRow(0).ToString).Equals(data_Date)]" sap:VirtualizedContainerService.HintSize="510,421" sap2010:WorkflowViewState.IdRef="If_7">
+                                                          <If.Then>
+                                                            <Sequence sap:VirtualizedContainerService.HintSize="476,237" sap2010:WorkflowViewState.IdRef="Sequence_62">
+                                                              <sap:WorkflowViewStateService.ViewState>
+                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                </scg:Dictionary>
+                                                              </sap:WorkflowViewStateService.ViewState>
+                                                              <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_26">
+                                                                <Assign.To>
+                                                                  <OutArgument x:TypeArguments="x:Int32">[dateIndex]</OutArgument>
+                                                                </Assign.To>
+                                                                <Assign.Value>
+                                                                  <InArgument x:TypeArguments="x:Int32">[index]</InArgument>
+                                                                </Assign.Value>
+                                                              </Assign>
+                                                              <ui:Break sap:VirtualizedContainerService.HintSize="434,25" sap2010:WorkflowViewState.IdRef="Break_3" />
+                                                            </Sequence>
+                                                          </If.Then>
+                                                          <If.Else>
+                                                            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_63" />
+                                                          </If.Else>
+                                                        </If>
+                                                      </Sequence>
+                                                    </ActivityAction>
+                                                  </ui:ForEachRow.Body>
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </ui:ForEachRow>
+                                                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[indexSecondLoop]" DataTable="[dataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="890,2779" sap2010:WorkflowViewState.IdRef="ForEachRow_6">
+                                                  <ui:ForEachRow.Body>
+                                                    <ActivityAction x:TypeArguments="sd:DataRow">
+                                                      <ActivityAction.Argument>
+                                                        <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                                                      </ActivityAction.Argument>
+                                                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="780,2589" sap2010:WorkflowViewState.IdRef="Sequence_64">
+                                                        <sap:WorkflowViewStateService.ViewState>
+                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                          </scg:Dictionary>
+                                                        </sap:WorkflowViewStateService.ViewState>
+                                                        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="738,54" sap2010:WorkflowViewState.IdRef="CommentOut_33">
+                                                          <ui:CommentOut.Body>
+                                                            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,258" sap2010:WorkflowViewState.IdRef="Sequence_70">
+                                                              <sap:WorkflowViewStateService.ViewState>
+                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                </scg:Dictionary>
+                                                              </sap:WorkflowViewStateService.ViewState>
+                                                              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,147" sap2010:WorkflowViewState.IdRef="LogMessage_35" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;index second loop &quot;+indexSecondLoop.ToString+&quot;    previous loop ka index  &quot;+dateIndex.ToString]">
+                                                                <sap:WorkflowViewStateService.ViewState>
+                                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                  </scg:Dictionary>
+                                                                </sap:WorkflowViewStateService.ViewState>
+                                                              </ui:LogMessage>
+                                                            </Sequence>
+                                                          </ui:CommentOut.Body>
+                                                          <sap:WorkflowViewStateService.ViewState>
+                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                            </scg:Dictionary>
+                                                          </sap:WorkflowViewStateService.ViewState>
+                                                        </ui:CommentOut>
+                                                        <If Condition="[dateIndex&lt;indexSecondLoop]" sap:VirtualizedContainerService.HintSize="738,2407" sap2010:WorkflowViewState.IdRef="If_8">
+                                                          <If.Then>
+                                                            <Sequence sap:VirtualizedContainerService.HintSize="704,2223" sap2010:WorkflowViewState.IdRef="Sequence_65">
+                                                              <Sequence.Variables>
+                                                                <Variable x:TypeArguments="x:String" Default="Nidhi Info" Name="tempPersonName" />
+                                                              </Sequence.Variables>
+                                                              <sap:WorkflowViewStateService.ViewState>
+                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                </scg:Dictionary>
+                                                              </sap:WorkflowViewStateService.ViewState>
+                                                              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="662,54" sap2010:WorkflowViewState.IdRef="CommentOut_32">
+                                                                <ui:CommentOut.Body>
+                                                                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,165" sap2010:WorkflowViewState.IdRef="Sequence_69">
+                                                                    <sap:WorkflowViewStateService.ViewState>
+                                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                      </scg:Dictionary>
+                                                                    </sap:WorkflowViewStateService.ViewState>
+                                                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,54" sap2010:WorkflowViewState.IdRef="LogMessage_34" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[CurrentRow(0).ToString]">
+                                                                      <sap:WorkflowViewStateService.ViewState>
+                                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                        </scg:Dictionary>
+                                                                      </sap:WorkflowViewStateService.ViewState>
+                                                                    </ui:LogMessage>
+                                                                  </Sequence>
+                                                                </ui:CommentOut.Body>
+                                                                <sap:WorkflowViewStateService.ViewState>
+                                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                  </scg:Dictionary>
+                                                                </sap:WorkflowViewStateService.ViewState>
+                                                              </ui:CommentOut>
+                                                              <If Condition="[CurrentRow(0).ToString.Contains(tempPersonName)]" sap:VirtualizedContainerService.HintSize="662,2041" sap2010:WorkflowViewState.IdRef="If_9">
+                                                                <If.Then>
+                                                                  <Sequence sap:VirtualizedContainerService.HintSize="628,1857" sap2010:WorkflowViewState.IdRef="Sequence_67">
+                                                                    <Sequence.Variables>
+                                                                      <Variable x:TypeArguments="s:String[]" Name="rowSplitArray" />
+                                                                    </Sequence.Variables>
+                                                                    <sap:WorkflowViewStateService.ViewState>
+                                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                      </scg:Dictionary>
+                                                                    </sap:WorkflowViewStateService.ViewState>
+                                                                    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="586,164" sap2010:WorkflowViewState.IdRef="CommentOut_34">
+                                                                      <ui:CommentOut.Body>
+                                                                        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,85" sap2010:WorkflowViewState.IdRef="Sequence_78">
+                                                                          <sap:WorkflowViewStateService.ViewState>
+                                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                            </scg:Dictionary>
+                                                                          </sap:WorkflowViewStateService.ViewState>
+                                                                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,147" sap2010:WorkflowViewState.IdRef="LogMessage_39" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[CurrentRow(0).ToString]" />
+                                                                        </Sequence>
+                                                                      </ui:CommentOut.Body>
+                                                                    </ui:CommentOut>
+                                                                    <Assign sap:VirtualizedContainerService.HintSize="586,84" sap2010:WorkflowViewState.IdRef="Assign_27">
+                                                                      <Assign.To>
+                                                                        <OutArgument x:TypeArguments="s:String[]">[rowSplitArray]</OutArgument>
+                                                                      </Assign.To>
+                                                                      <Assign.Value>
+                                                                        <InArgument x:TypeArguments="s:String[]">[CurrentRow(0).ToString.Split(" ")]</InArgument>
+                                                                      </Assign.Value>
+                                                                    </Assign>
+                                                                    <If Condition="[(tempPersonName).Contains(rowSplitArray(0))]" sap:VirtualizedContainerService.HintSize="586,1441" sap2010:WorkflowViewState.IdRef="If_13">
+                                                                      <If.Then>
+                                                                        <Sequence sap:VirtualizedContainerService.HintSize="552,1257" sap2010:WorkflowViewState.IdRef="Sequence_74">
+                                                                          <Sequence.Variables>
+                                                                            <Variable x:TypeArguments="x:String" Name="concatString" />
+                                                                            <Variable x:TypeArguments="sd:DataTable" Name="output_Actual_DataTable" />
+                                                                          </Sequence.Variables>
+                                                                          <sap:WorkflowViewStateService.ViewState>
+                                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                            </scg:Dictionary>
+                                                                          </sap:WorkflowViewStateService.ViewState>
+                                                                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="510,147" sap2010:WorkflowViewState.IdRef="LogMessage_40" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[CurrentRow(0).ToString]" />
+                                                                          <ui:Comment sap:VirtualizedContainerService.HintSize="510,75" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  compare original data to this data and remove duplicate" />
+                                                                          <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[output_Actual_DataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="510,88" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="DataSheet" WorkbookPath="Data.xlsx" />
+                                                                          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[output_Actual_DataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="510,739" sap2010:WorkflowViewState.IdRef="ForEachRow_7">
+                                                                            <ui:ForEachRow.Body>
+                                                                              <ActivityAction x:TypeArguments="sd:DataRow">
+                                                                                <ActivityAction.Argument>
+                                                                                  <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                                                                                </ActivityAction.Argument>
+                                                                                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,549" sap2010:WorkflowViewState.IdRef="Sequence_79">
+                                                                                  <Sequence.Variables>
+                                                                                    <Variable x:TypeArguments="x:String" Name="tempDate" />
+                                                                                  </Sequence.Variables>
+                                                                                  <sap:WorkflowViewStateService.ViewState>
+                                                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                                    </scg:Dictionary>
+                                                                                  </sap:WorkflowViewStateService.ViewState>
+                                                                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,147" sap2010:WorkflowViewState.IdRef="LogMessage_42" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Data sheet date   &quot;+(CurrentRow(&quot;Date&quot;).ToString)  +&quot;  variable  data date &quot;+data_Date]" />
+                                                                                  <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_33">
+                                                                                    <Assign.To>
+                                                                                      <OutArgument x:TypeArguments="x:String">[tempDate]</OutArgument>
+                                                                                    </Assign.To>
+                                                                                    <Assign.Value>
+                                                                                      <InArgument x:TypeArguments="x:String">[CurrentRow("Date").ToString]</InArgument>
+                                                                                    </Assign.Value>
+                                                                                  </Assign>
+                                                                                  <ui:Comment sap:VirtualizedContainerService.HintSize="434,56" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Modify Date Logic Start&#xD;&#xA;" />
+                                                                                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="434,54" sap2010:WorkflowViewState.IdRef="CommentOut_35">
+                                                                                    <ui:CommentOut.Body>
+                                                                                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,261" sap2010:WorkflowViewState.IdRef="Sequence_82">
+                                                                                        <sap:WorkflowViewStateService.ViewState>
+                                                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                                          </scg:Dictionary>
+                                                                                        </sap:WorkflowViewStateService.ViewState>
+                                                                                        <ui:Comment sap:VirtualizedContainerService.HintSize="388,56" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// After modify date logic&#xD;&#xA;" />
+                                                                                        <If Condition="[(CurrentRow(&quot;Date&quot;).ToString).Equals(data_Date)]" sap:VirtualizedContainerService.HintSize="388,54" sap2010:WorkflowViewState.IdRef="If_14">
+                                                                                          <sap:WorkflowViewStateService.ViewState>
+                                                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                                            </scg:Dictionary>
+                                                                                          </sap:WorkflowViewStateService.ViewState>
+                                                                                          <If.Then>
+                                                                                            <Sequence sap:VirtualizedContainerService.HintSize="476,731" sap2010:WorkflowViewState.IdRef="Sequence_80">
+                                                                                              <Sequence.Variables>
+                                                                                                <Variable x:TypeArguments="x:String" Name="tablePersonName" />
+                                                                                                <Variable x:TypeArguments="x:String" Name="tableDescription" />
+                                                                                                <Variable x:TypeArguments="x:String" Name="tableTime" />
+                                                                                                <Variable x:TypeArguments="x:String" Name="tempAllData" />
+                                                                                              </Sequence.Variables>
+                                                                                              <sap:WorkflowViewStateService.ViewState>
+                                                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                                                </scg:Dictionary>
+                                                                                              </sap:WorkflowViewStateService.ViewState>
+                                                                                              <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_29">
+                                                                                                <Assign.To>
+                                                                                                  <OutArgument x:TypeArguments="x:String">[tablePersonName]</OutArgument>
+                                                                                                </Assign.To>
+                                                                                                <Assign.Value>
+                                                                                                  <InArgument x:TypeArguments="x:String">[CurrentRow("Person Name").ToString]</InArgument>
+                                                                                                </Assign.Value>
+                                                                                              </Assign>
+                                                                                              <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_30">
+                                                                                                <Assign.To>
+                                                                                                  <OutArgument x:TypeArguments="x:String">[tableDescription]</OutArgument>
+                                                                                                </Assign.To>
+                                                                                                <Assign.Value>
+                                                                                                  <InArgument x:TypeArguments="x:String">[CurrentRow("Description").ToString]</InArgument>
+                                                                                                </Assign.Value>
+                                                                                              </Assign>
+                                                                                              <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_31">
+                                                                                                <Assign.To>
+                                                                                                  <OutArgument x:TypeArguments="x:String">[tableTime]</OutArgument>
+                                                                                                </Assign.To>
+                                                                                                <Assign.Value>
+                                                                                                  <InArgument x:TypeArguments="x:String">[CurrentRow("Time").ToString]</InArgument>
+                                                                                                </Assign.Value>
+                                                                                              </Assign>
+                                                                                              <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_32">
+                                                                                                <Assign.To>
+                                                                                                  <OutArgument x:TypeArguments="x:String">[tempAllData]</OutArgument>
+                                                                                                </Assign.To>
+                                                                                                <Assign.Value>
+                                                                                                  <InArgument x:TypeArguments="x:String">[tablePersonName+" "+tableDescription+" "+tableTime]</InArgument>
+                                                                                                </Assign.Value>
+                                                                                              </Assign>
+                                                                                              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,147" sap2010:WorkflowViewState.IdRef="LogMessage_41" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[tempAllData]" />
+                                                                                            </Sequence>
+                                                                                          </If.Then>
+                                                                                          <If.Else>
+                                                                                            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_81" />
+                                                                                          </If.Else>
+                                                                                        </If>
+                                                                                      </Sequence>
+                                                                                    </ui:CommentOut.Body>
+                                                                                    <sap:WorkflowViewStateService.ViewState>
+                                                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                                      </scg:Dictionary>
+                                                                                    </sap:WorkflowViewStateService.ViewState>
+                                                                                  </ui:CommentOut>
+                                                                                </Sequence>
+                                                                              </ActivityAction>
+                                                                            </ui:ForEachRow.Body>
+                                                                          </ui:ForEachRow>
+                                                                        </Sequence>
+                                                                      </If.Then>
+                                                                      <If.Else>
+                                                                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_75" />
+                                                                      </If.Else>
+                                                                    </If>
+                                                                  </Sequence>
+                                                                </If.Then>
+                                                                <If.Else>
+                                                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_68" />
+                                                                </If.Else>
+                                                              </If>
+                                                            </Sequence>
+                                                          </If.Then>
+                                                          <If.Else>
+                                                            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_66" />
+                                                          </If.Else>
+                                                        </If>
+                                                      </Sequence>
+                                                    </ActivityAction>
+                                                  </ui:ForEachRow.Body>
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </ui:ForEachRow>
+                                                <Assign sap:VirtualizedContainerService.HintSize="890,84" sap2010:WorkflowViewState.IdRef="Assign_17">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:Boolean">[temp]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="890,54" sap2010:WorkflowViewState.IdRef="Delay_7">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </Delay>
+                                                <ui:Break sap:VirtualizedContainerService.HintSize="890,25" sap2010:WorkflowViewState.IdRef="Break_2" />
+                                              </Sequence>
+                                            </If.Then>
+                                            <If.Else>
+                                              <Sequence sap:VirtualizedContainerService.HintSize="476,172" sap2010:WorkflowViewState.IdRef="Sequence_47">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <Assign sap:VirtualizedContainerService.HintSize="434,84" sap2010:WorkflowViewState.IdRef="Assign_18">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:Boolean">[temp]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:Boolean">[True]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                              </Sequence>
+                                            </If.Else>
+                                          </If>
+                                        </Sequence>
+                                      </ActivityAction>
+                                    </ui:ForEachRow.Body>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:ForEachRow>
+                                </Sequence>
+                              </ui:InterruptibleDoWhile.Body>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:InterruptibleDoWhile>
+                          </Sequence>
+                        </ActivityAction>
+                      </ueab:ExcelProcessScopeX.Body>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ueab:ExcelProcessScopeX>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEach.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ForEach>
           </Sequence>
         </ActivityAction>
       </uix:NApplicationCard.Body>
       <uix:NApplicationCard.TargetApp>
-        <uix:TargetApp Area="-8, -8, 1040, 736" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAA11SURBVGhDvZcJXFVVGsCfiYoriAtqgg9EQeDJpiKiLKKIK1hNP5tSmZpGmxattFwKKDNNwIegoLKa2qImplnuz3JpLM2amUZzVNQQbUwe0CL6nueb7zvL5T58qC0z5/f7/77vfOdezv+cd+71avg9WnuX5u6TunmkLujrZS419S4/OqR/xelhodbvhg+A74YPhNMxYdbPo4IrysP9LQv6eJlHdXFP6ena0tiqdWu34IFRU+577Mktj8977eSzi5fXEY/PXXACa+XBA6Im0zVymt+3kfQ0L88Z5aF9LUpURF0er/qCy/ERnDNJw+Cdp59h87JX3pyTUwS3Y1ZmwbWEiZNy2rbv4Cmn/m2NxGcbe6T/e1hI9XfxEYyLxYU7RhJHKOprxOFJE1laZr5T2dvx7OK82j6m0GSp8evabGN3FFdHg4RoRxvkeC02nKmdvoT5pdgw3q+Ki4Dy6dNgjrnQqeDd8KK5kA1JHPeSoVmzZlLp7hqd170Dgo7TbnJIsFFUojyi7KW4cAldEwH7Jk9yKvVrMEVG/0mq3bk96Nl56qmhIVZNEKW4oCaql5XEhkMVERPGqmJC2ZEHxsPcpaudyihwd2HusmIO5c6uUczOXnnD6B84Uio23Wb16pauZJWY2l2SEzFURByjcS6PtarYMBnDYdWL85yKKLg8xmeXFMDMN8TzcadF0JtLajpvz3t3S9fvrpIROyvzGJTEeHGYFKYcawQfQ06NjL6rc0/yb23fC5t2fwLPZRbw2u0WgWOsXQe37lLXsT3o2WlqFZfSHQfZF6JSUEYhHUoLEfnQEKbijqmPOBVQkKTip2vXgNpLeaUwmx+52y88LDp2ulRuaPTAnogyVXNBlCYJEtXvqpBGWS4qYqXK+SJCoRIjkTs/gzmbXEFH55nFK2Dttt1wtaYWrlTXwOY9B+DpRcvxeXB+j+LB6TN3SO2GdiQysMJhF0mIcimkjzyP7s+UrMZQIoTHtMwVTicnaNdpAU8vyoOzlVWw69NjUL73IFy6chVm4KLUNY3vU8xclFsjtUV7zsszXdtFQifuKEhyOmgRjWrfyjgve5XTyRXPZ62EhYXr4ebNm5C9ZiMsWLVOy9Wz0BSzsgrqpbrB0LJzG2Pms3ENu4lS3yJ8AZpQQ05jPCqGmFhlUjTUFhdA/Refg63qIj/P8/NKnE5O0CvzqdfzYNfho/Dt5f/AXxfmwvRXc+D0hYtw4Ng/4MmFefwaZ/cSDr+AcXp4WUxZCnwxZqC2e46CUji6v0TlIXDpgSQu7awtLn7b6eTqwZ2VtQouf18N9ddvQMXFy3AO+bm+Hqpr67RrmjpG9AHI5Vt2amMMf+s+iECeeC1RE7uAu+ooLbigiApm1pw34GZdndQVrcrK4IMvr0OhpR5eLdnhdHJiBr7z89/dCna7nb8+N+78GDbu+hg27NwPNpsdijZ/yJ8Fek6c3a/9W+AR450auj6Zha1PgfD1E+HDP0RKQRPjcYjCxKUpP4+xpihfKou27fh1mF72IwxMr4FBGbU83rfoM6eTq4f31LlK/gA/nrGUv41I+M/p2XCy4gL/NfjbqNG9Cu01GrAw/njoumRG8rSQKUuShKyUPj+YpDEqokxQnbNYatOO34RppUJ8QEYNDEQGUI7EvHLB6eQvLBWfDl+ePA2Fm7bzB3ZebgnnucyVULBhG/z9mzMwH/svNPEZ4ubR2ciPT8jaCSwEFxC2LgVCEYrLp0Wz84ODGO40F6b8nOxXpiQydWxIfry5ThMmItIaoP7jmdtumfxFs4gzl+TDLPmm0p93qqnPCmeUlc0F97b3uBs6RHgmh65NhsZEF0+Ar2NM7FwkidMigoHiuchA9sMHW7g8tb+U/ICiVh0ojtLhulpMxnl4wXzr24hk1VtG/6CqvKkPu/nLVsJVyyCYMtot1dDjj0HmkDcngCCZR1pA/zfHs8VPD9OkKyKDoGJwEFROTJTqAFvxzJOoc8QiFONeO+4g0VjM2QKa6h95/36wHQ6A7Ge65hh6z4my9F8zAUxrxjP9IkxrxjGqHxkZClxecnXpIqkPMDa7FsJetjaAog79Rjzw+iEHkV/Dzg2Pgu2QP7MdCoD3FvXcYuiXlVDRf814cIapbBx7aGECqxjYj51FKgYFwrVjn3H5k5fsEIpSBMmp/PZUQ+KrX8OspWVO5W5Heu4K+Of20SjfB+X7MPuhvnBmk0+FIbhsLOtfhsKIiTOO51SnnGpbk8P4As7iAtTDu+9fNyAEhTgvyYiQqIj6mr5uhci0Snh0yQdORZ1RWjoHvt8XDraDfsx2sA+P9kN+cOUjH6vBVDoOgktRFmNTJOQmwdkBAexMhD/j9tgK9l2D/iiuULIONSc5X6zM4zK+gfvxWGUUbYesso2QtqIM0nLzIbNgCRSXzGU7N6TCvz+KB5K1HfRl9oO9wX7Qj/d5jtEQVDqGBaOkI2MhuATBPKhkDAtEch4bDGciArQF5O/9WZPTY7pNv/GYqtHfUo1EG2QVvoJDvWkcbAd88BfAiLmh3/JR1sCS0SyIhBHKKQYVj+F9qgcWj2aDCpLgq+hA/Eir5BNt+aIeTPOrIXj+VR5JhEd93iiqa4OppqvvxePIm62WS5Gs7YARF+KDfR+5AMyxxqPIec3gtySugiSJfiiqiWNUUJ2YMyMafj56hM91Ef8BIyGBkHNO47Fbrz1RZed/k9V8yqXsKEeCDXgzqjXUvRlxesO9FYaeT4aXBxaNwV0WsoFFox3yfkVJjOB1vO7optV8MmqpRbUQhAJBKCXiLycxq0b+NYCbZ15BuV4o6gjKgu0TL5QmMJf9PbmeFkO3SYFmISdk+WJknwgoHIULoJjEiEnmZDkdQPmx6xA47yoEoggHc5LitTugris/Vi//GoD9sygU7Im7TYIUe5I0yfK+iBKsZz/llmNwi7o3lSS5aGESEHwxhQpRE4j+kaqv5JQAUwvroB+KKEiq37zvNVH9mOM1V/HeWvlX8Ph8t1GJSu5F4R4IxZ5g5zXqY35AMGGoa7KheWsXdy63Ogn8VyfyRQTwHBeFUQ/V6JqEt6dC3fUf+cSV1TdhxBIrBKA0iQfMFbEhv6rV6BpVG5FphUp8jqjV1f+Iux9JskL04+48p2jXR04POd6dGT2bG/nntNfzAy0Bq0dJ0VHgvyoR5bG/StVEnfdlbeHhAj45NVrEFNxNkrsFuQA9k/Fauke1mlN49rkUyXVjnE+6U03X74aL6I4LFPVjRZ2Pc3lq7gneM/xRTNF35UjW0E90qPOxlaKWd3StVBBt89F6GP5GNfRFSX9ERcXk1TWwWXfmqb33VTFUW+h4aMI6PFFa3xfYkcmjXKdKfYPhHlcXdz9zvLUPyhFcUEpS7CuhMYr6Gv0SdAT07cRFO+z++jrk7v4J8vb8hAu75rDj1Orqf4CFhwpg49Z+KNWVdhmjp8w9UZJyRVfsdwXb/i6MoDHt+KjmMc43XUn1LUDZghGsb8FIzBGs+cm+Xz5G2e8jx2PXPczeO7lTqt25/e3ilxC79mEWWxSDsiim2N8ZBRGt34Uj5ZFOtAAofrF9qdRuaPQr+GbFVSuxPvkIRZ6PcOiTtNanMdmPW/sILDxYwAW/rbssdYHnVMv97E2IKEkR9+J953bjW0UT64yR0OUWyh3GON6e9zjuvmodx/qm4w7zCXrnJzBNnEeF6PdeQeP8F9FyqvutEFBNRTGurw1ns9/Cr8v9HngcSMyDRIWkpaPMCQ/HiGNpqa7pUtd585oTeVxJKJS834oEiX68cV9fU9cngO/y4Vye8vCCODi3Cx9GKcUFLSTpgTURbRZ3xmuWjthHMJ5+u8NZqdl0c/FwNfpkxlh7L08ABU2qjyQjYjxTYhQF8XxM0bjfe/lwMG8IQLmOKEti7uyGxQ37hLusuTGKN/Z14DXiyrYOVmNTR6dxaz+oW6pPXjwj1KQCzPMwEtj3xdhwjRijvlbHSLn+vqGroqVUg5zI3aSwG9i02J5hzmNydIsUqXd3zWO0bwZN7gyf3DhNUqvnxt9yncKI19M9xIbN+KlMYkrQ0gHFRRSy7VC6PS1KgPnLU1plSK1f1txHG9O5GCIkRCSUmHEZ5rm0qHiONi77KhKTigdwIT12C8k61mz72jJe39cO0qa2uP1De6fWJrhzivfioVYU1UR8lsVDr2WxKB/LKFc1H7yG6gT16R59/9wOfChRjsQcaYu0wXpbuLG3NbMhV7a2sU4Z5ZIqNX5bc+noauyZFlnBBXNQPEdG7HNJzHvlxCBiTEMbj2HPrQkWcly0DZAkFxc1Efe2pgifr3Y9bvRsdncP7C9pbkm90pWYN0oZc2K5qLeZchFV3sssxojoFYNx9/HtQqJCVuKqSdv2tmJX3m9pfXmKy68773fb6Nfo9JB/KYmSpB6v7GF8AV7mYXwMc14vfBf/G4iCKEzSgj2ttPzK+y2qX57SPN29bTN3Oc3/vtFC2g3sltp9VsRxEufCS2M0RC0GhiwfTPINkPielgyBPUtbWJ66v/mM/6u4s0aLoYfdPcXX3OUJk6XHS4MqaBE9s4aydzbeizvsYj213qVi0ysu5VlPNDdPHtVs6u8jbTD8F/z1+T8u+ZBtAAAAAElFTkSuQmCC" InformativeScreenshot="ccb1d0d9db189d5fd99e5afcc8656744.png" Selector="&lt;html app='chrome.exe' title='New Tab' /&gt;" Title="New Tab" Url="chrome://newtab/" />
+        <uix:TargetApp Area="-8, -8, 1040, 736" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAKRSURBVDhPfVJbS1RRFN6PElh4oegH9AMi7CmURseiiF56qii6gUG9JGUUXaQL0luiUpFdJzPLAiEw85IaVthFRZJ0bLS0GWc8jjPN5ex9zt6rb5+jqZANfLP22Wt93/rWOocREVOAjnPIC3HjWcxKTCtSZCtpx+3k1G87eV/nFtUxpBkOal4gI8iNRk0yxCw9DrXQ5cBdKg/cIV+wmSK407m05D7UrnAFFHPISGRERHTQVBZdAml19zbK7CxcgtzurXR29CaZUqi0FJ+0iOY6VkKm0cCVoJ0DZZTZ4XHxZqnAPLb3l5KQlsJo9cp1oNYrJenc6C2HmP++hGrGGymn3busSOlIJdyjv6J8ZlixhjCfdSxmtnloKB6AKUX7+8pdJ/8QyOoqprCYsVBXx+J2YvpR6JWbbN1MCSsFAaLqwNNlBTRqJ5v0GwoxCSsXv9e6iXYP1f1sdra9oWvffwVO+2swhn6F+D8zesNNgLCucxeF0tPUEflIua3FjujK9kJaBTiCc3sp81eTkvgQknY6cu/XywV1FHk/HKO4SFBf9Bt5eo5S7VgT+RMTdHjgyl9XGMGWegRuC1/QNFR215YFEXQteFdCw/FxdJGEQicOxEacnF5ihEdTcP9Q72CTLjjlr1oQ0ECn7DYv7fl8np5MvKb6iRba2HPAuS8droSegrAqYJhjjcTTkaGKpQIael5tGV0d4Fz05TiZNhfgPBfCwock5d60za21b3dQXu9BOvT1KuUsHmcO2vaJ4esKIwtw+iGQJYRgDIcHhojxH6kpA2fSCJsz5rUxn9w9eIFOjlTR7ckmjruEm1cvELMZfoK7ApNAL1ABeIEioN6WdgTREcSOwoiNIBcA2JvUPMYFZ38AYefjAHkVITAAAAAASUVORK5CYII=" InformativeScreenshot="2ce068a4696d23d0b441cd70bb16fe8c.jpg" Selector="&lt;html app='chrome.exe' title='WhatsApp' /&gt;" Title="WhatsApp" Url="https://web.whatsapp.com/" />
       </uix:NApplicationCard.TargetApp>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </uix:NApplicationCard>
   </Sequence>
 </Activity>
